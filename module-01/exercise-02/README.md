@@ -47,7 +47,7 @@ Install required dependencies:
 uv add pandas pyarrow
 uv add sqlalchemy psycopg2-binary
 uv add tqdm
-uv add click
+uv add 
 ```
 
 ## Running PostgreSQL with Docker
@@ -73,25 +73,28 @@ docker run -it --rm \
 postgres:18 uses PostgreSQL version 18 (latest as of Dec 2025)
 
 
+
 ## Running pgAdmin - Database Management Tool
-docker run -it \
+```bash
+  docker run -it \
   -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
   -e PGADMIN_DEFAULT_PASSWORD="root" \
   -v pgadmin_data:/var/lib/pgadmin \
   -p 8085:80 \
   dpage/pgadmin4
+  ```
 
-pgAdmin can't see the PostgreSQL container. They need to be on the same Docker network!
+At this point, pgAdmin cannot see Postgres yet — both containers must be on the same Docker network.
 
-## Running Postgres and pgAdmin together
+## Connecting Postgres and pgAdmin with a Docker Network
 ### Create a virtual Docker network called pg-network
 ```bash
 docker network create pg-network
 ```
 
-
 Run PostgreSQL on the network:
-docker run -it \
+```bash
+  docker run -it \
   -e POSTGRES_USER="root" \
   -e POSTGRES_PASSWORD="root" \
   -e POSTGRES_DB="ny_taxi" \
@@ -100,9 +103,11 @@ docker run -it \
   --network=pg-network \
   --name pgdatabase \
   postgres:18
+  ```
 
 In another terminal, run pgAdmin on the same network:
-docker run -it \
+```bash
+  docker run -it \
   -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
   -e PGADMIN_DEFAULT_PASSWORD="root" \
   -v pgadmin_data:/var/lib/pgadmin \
@@ -110,10 +115,12 @@ docker run -it \
   --network=pg-network \
   --name pgadmin \
   dpage/pgadmin4
+  ```
 
-
-  Some explanation about the containers
-
+Now connect to Postgres from pgAdmin using:
+- Host: pgdatabase
+- Port: 5432
+- User / Password: root
 
 ## Build the Docker Image
 ```bash
@@ -121,8 +128,8 @@ docker build -t taxi_ingest:v001 .
 ```
 
 ## Containerized Ingestion
-
-docker run -it \
+```bash
+  docker run -it \
   --network=pg-network \
   taxi_ingest:v001 \
     --pg-user=root \
@@ -134,29 +141,33 @@ docker run -it \
     --year=2021 \
     --month=2 \
     --chunksize=100000
+  ```
 
-All data is added. 
-Some notes
-
-
-Create a new server in pgAdmin
+After ingestion completes, the data will be available in Postgres and visible in pgAdmin.
 
 ## Docker Compose
-Some info about docker compose. So, this file describes all the Docker containers we need to run (pgdatabase and pgadmin).
+Docker Compose allows us to define and run Postgres and pgAdmin together using a single configuration file.
+
 
 ### Start Services with Docker Compose
 ```bash
 docker-compose up
 ```
-
-Create a server in pgAdmin to access database.
+Docker Compose automatically:
+- Docker Compose automatically:
+- Creates a dedicated network
+- Starts Postgres and pgAdmin
 
 
 ### Run data ingestion with docker-compose
-First check the network link to include the network name:
-docker network ls  --> In this case: pipeline_default
+First, find the network name:
+```bash docker network ls```
+In this case: pipeline_default
 
-docker run -it \
+Run the ingestion container on that network:
+
+```bash
+  docker run -it \
   --network=exercise-02_default \
   taxi_ingest:v001 \
     --pg-user=root \
@@ -168,4 +179,11 @@ docker run -it \
     --year=2021 \
     --month=2 \
     --chunksize=100000
+```
 
+## Summary
+- PostgreSQL, pgAdmin, and the ingestion pipeline run in separate containers
+- Docker networking enables container-to-container communication
+- Data is persisted using Docker volumes
+- Docker Compose simplifies multi-service orchestration
+- The same pipeline runs reproducibly across environments
