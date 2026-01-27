@@ -11,7 +11,8 @@ pip --version
 
 Using the official python:3.13 Docker image, running pip --version inside the container reports pip **25.3**.
 
-![Output of pip --version command run inside the python:3.13 Docker container](images/q1_pip_version.png)
+<img src="images/q1_pip_version.png" alt="Output of pip --version command run inside the python:3.13 Docker container" width="800">
+
 
 ## Question 2. Understanding Docker networking and docker-compose
 Given the following docker-compose.yaml, what is the hostname and port that pgadmin should use to connect to the postgres database?
@@ -62,7 +63,9 @@ WHERE lpep_pickup_datetime between '2025-11-01' and '2025-12-01'
 AND trip_distance<=1;
 ```
 
-![SQL query output showing the count of trips with distance less than or equal to one mile](images/q3_short_trips_count.png)
+<img src="images/q3_short_trips_count.png"
+     alt="SQL query output showing the count of trips with distance less than or equal to one mile"
+     style="max-width: 300px;">
 
 ## Question 4. Longest trip for each day
 Which was the pick up day with the longest trip distance? Only consider trips with trip_distance less than 100 miles (to exclude data errors).
@@ -81,7 +84,9 @@ ORDER BY trip_distance DESC
 LIMIT 1;
 ```
 
-![SQL query result showing the pickup day with the longest trip distance](images/q4_longest_trip_day.png)
+<img src="images/q4_longest_trip_day.png"
+     alt="SQL query result showing the pickup day with the longest trip distance"
+     style="max-width: 300px;">
 
 ## Question 5. Biggest pickup zone
 Which was the pickup zone with the largest total_amount (sum of all trips) on November 18th, 2025?
@@ -107,7 +112,9 @@ ORDER BY s.total_amount_sum DESC
 LIMIT 1;
 ```
 
-![SQL query result showing pickup zones ordered by total trip amount](images/q5_biggest_pickup_zone.png)
+<img src="images/q5_biggest_pickup_zone.png"
+     alt="SQL query result showing pickup zones ordered by total trip amount"
+     style="max-width: 300px;">
 
 ## Question 6. Largest tip
 For the passengers picked up in the zone named "East Harlem North" in November 2025, which was the drop off zone that had the largest tip?
@@ -133,7 +140,10 @@ ORDER BY total_tip DESC
 LIMIT 1;
 ```
 
-![Query result highlighting Yorkville West as the top drop-off zone by total tip](images/question6_answer.png)
+<img src="images/q6_largest_tip.png"
+     alt="SQL Query result highlighting Yorkville West as the top drop-off zone by total tip"
+     style="max-width: 300px;">
+
 
 
 ## Question 7. Terraform Workflow
