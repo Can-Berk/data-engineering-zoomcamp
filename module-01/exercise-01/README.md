@@ -2,7 +2,7 @@
 
 ## Description
 
-In this exercise, we develop a simple Python pipeline using a virtual environment, then package it into a Docker image using a Dockerfile and run it as a container.
+In this exercise, a simple Python pipeline is developed using a virtual environment, then packaged into a Docker image using a Dockerfile and run as a container.
 
 The goal is to understand:
 
@@ -16,9 +16,16 @@ The goal is to understand:
 
 ---
 
+<img src="../images/docker_container_1.png"
+     alt="Diagram showing local execution of pipeline.py in a uv-managed virtual environment on the host, and containerized execution inside a Docker container with a uv-managed environment recreated from uv.lock"
+     style="max-width: 750px;">
+
+*Figure: This figure shows that the pipeline is first executed locally using a uv-managed virtual environment on the host, then packaged into a Docker image that recreates the same environment inside the container using the locked dependency specification.*
+
+
 ## Local development with a virtual environment
 
-We use a **virtual environment** to isolate dependencies for this project from other projects and from the system Python.
+A **virtual environment** is used to isolate dependencies for this project from other projects and from the system Python.
 
 ### Install `uv`
 ```bash
@@ -60,7 +67,7 @@ Dependencies are recorded in pyproject.toml and locked in uv.lock.
 uv run python pipeline.py 10
 ```
 
-This script produces a binary (parquet) file, so let's make sure we don't accidentally commit it to git by adding parquet extensions to .gitignore:
+This script produces a binary (parquet) file, so accidental commits to git are avoided by adding parquet extensions to .gitignore
 
 ```
 *.parquet
@@ -68,7 +75,7 @@ This script produces a binary (parquet) file, so let's make sure we don't accide
 
 
 ## Dockerizing the Pipeline
-Once the pipeline works locally, we package it into a Docker image.
+Once the pipeline works locally, it is packaged into a Docker image.
 
 ### Key Dockerfile Instructions
 
@@ -97,7 +104,7 @@ This command:
 
 
 ### Run the Docker Container
-We can now run the container and pass an argument to it, so that our pipeline will receive it.
+The container is now ready to run with an argument that is passed to the pipeline.
 
 ```bash
 docker run -it --rm test:v1 10
