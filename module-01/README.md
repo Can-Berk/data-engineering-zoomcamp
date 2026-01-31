@@ -1,7 +1,7 @@
-# Module 01 — Docker, Infrastructure, and Data Engineering Basics
+# Module 01 — Containerized Data Pipelines and Infrastructure Management
 
 ## Overview
-This module covers the following tools: Docker, Postgres, Terraform, GCP
+This module covers the following tools: Docker, Postgres, Terraform, Google Cloud Platform (GCP).
 
 
 ## Topics Covered
@@ -18,10 +18,12 @@ This module covers the following tools: Docker, Postgres, Terraform, GCP
 ### Terraform
 - **Terraform** is an **Infrastructure as Code (IaC)** tool that allows infrastructure to be defined using configuration files instead of manual steps.
 - Infrastructure definitions are version-controlled, reproducible, and auditable.
+- Cloud access and resource management are handled via Terraform **providers**
 
-#### GCP (Google Cloud Platform)
-- Terraform is later used to provision and manage cloud resources on GCP.
-- This includes storage, compute, and networking components required for data engineering pipelines.
+#### Terraform Provider for GCP (Google Cloud Platform)
+- Using the Terraform provider for GCP to manage Google Cloud resources.
+- Defining cloud infrastructure declaratively.
+- Provisioning storage, compute, and networking components required for data engineering pipelines.
 
 ---
 
@@ -29,5 +31,6 @@ This module covers the following tools: Docker, Postgres, Terraform, GCP
 
 | Exercise | Main topic | Description |
 |----------|-------|-------------|
-| Exercise 01 | Docker image & container | Build and run a Docker image for a simple Python pipeline |
-| Exercise 02 | Multi-container orchestration | Dockerized data ingestion into a Dockerized Postgres database, inspected via pgAdmin. |
+| [Exercise 01](./exercise-01) | Docker image & container | Build and run a Docker image for a simple Python pipeline |
+| [Exercise 02](./exercise-02) | Multi-container orchestration | Dockerized data ingestion into a Dockerized Postgres database, inspected via pgAdmin. |
+| [Exercise 03](./exercise-03) | Container, SQL & Terraform | Dockerized data ingestion, querying data with SQL, and managing GCP infrastructure using Terraform. |
