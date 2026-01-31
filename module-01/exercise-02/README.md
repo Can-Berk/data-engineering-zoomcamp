@@ -15,6 +15,12 @@ The goal is to:
 
 ## Architecture Overview
 
+<img src="../images/docker_multi-container.png"
+     alt="Diagram of a Docker network with a Python ingest container sending data to a PostgreSQL container and a pgAdmin UI container, all connected via pg-network with exposed host ports."
+     style="max-width: 750px;">
+
+*Figure: Multi-container Docker setup where a Python ingest container (taxi_ingest:v001) loads data into a PostgreSQL database (postgres:18 / pgdatabase) over a shared Docker network (pg-network), while pgAdmin (dpage/pgadmin4) provides a web UI to manage the database. Containers communicate via internal network hostnames rather than localhost, with selected ports exposed to the host.*
+
 This exercise consists of three main components:
 
 1. **Postgres container**
@@ -168,11 +174,11 @@ Run the ingestion container on that network:
 
 ```bash
   docker run -it \
-  --network=exercise-02_default \
+  --network=exercise-03_default \
   taxi_ingest:v001 \
     --pg-user=root \
     --pg-pass=root \
-    --pg-host=pgdatabase \
+    --pg-host=db \
     --pg-port=5432 \
     --pg-db=ny_taxi \
     --target-table=yellow_taxi_trips_2021_2 \
