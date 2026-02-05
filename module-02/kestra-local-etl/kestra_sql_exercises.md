@@ -39,7 +39,7 @@ How many rows are there for the `Yellow` Taxi data for all CSV files in the year
 
 <img src="../images/q3_yellowtaxi_2020_row_number.png"
      alt="Yellow Taxi 2020 row count"
-     style="max-width: 350px;">
+     width="400">
 
 
 ## Question 4.
@@ -49,7 +49,7 @@ How many rows are there for the `Green` Taxi data for all CSV files in the year 
 
 <img src="../images/q4_greentaxi_2020_row_number.png"
      alt="Green Taxi 2020 row count"
-     style="max-width: 350px;">
+     width="400">
 
 
 ## Question 5.
@@ -59,7 +59,7 @@ How many rows are there for the `Yellow` Taxi data for the `March 2021` CSV file
 
 <img src="../images/q5_yellowtaxi_2021march_row_number.png"
      alt="Yellow Taxi March 2021 row count"
-     style="max-width: 350px;">
+     width="400">
 
 ## Question 6.
 How would you configure the timezone to New York in a Schedule trigger?
@@ -68,4 +68,4 @@ How would you configure the timezone to New York in a Schedule trigger?
 
 <img src="../images/q6_trigger.png"
      alt="Kestra Schedule trigger timezone configuration"
-     style="max-width: 350px;">
+     width="400">
