@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: "Raw data sources for NY Taxi rides"
+    database: data-workflows-demo # BigQuery project ID
+    schema: nytaxi19_20 # BigQuery dataset name
+    tables:
+      - name: yellow_tripdata # BigQuery table 1
+      - name: green_tripdata # BigQuery table 2
