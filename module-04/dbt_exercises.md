@@ -15,9 +15,19 @@ models/
 If you run `dbt run --select int_trips_unioned`, what models will be built?
 
 
-**Solution**: This builds the upstream models `stg_green_tripdata` and `stg_yellow_tripdata`, followed by the selected model `int_trips_unioned`.
+**Solution**: `int_trips_unioned` only. Because --select int_trips_unioned selects exactly that node, dbt will not automatically include upstream or downstream unless it is explicitly stated with the selector  `+`.
 
 
+| Command | Result |
+|------------|------------|------------|---------------------------|
+| `dbt run --select +int_trips_unioned`  | upstream + the model |
+| `dbt run --select int_trips_unioned+` | the model + downstream |
+| `dbt run --select +int_trips_unioned+`| upstream + downstream |
+
+
+<img src="./images/dbt_lineage_execution.png" alt="dbt_lineage_execution">
+
+<br>
 
 # Question 2. dbt Tests
 You've configured a generic test like this in your `schema.yml`:
@@ -43,3 +53,40 @@ What happens when you run `dbt test --select fct_trips`?
 | `dbt run`  | Yes | No | `0` |
 | `dbt test` | No | Yes| non-zero |
 | `dbt build`| Yes | Yes | non-zero |
+
+
+<img src="./images/accepted_values_assertion_failure.png" alt="accepted_values_assertion_failure">
+
+<br>
+
+# Question 3. Counting Records in `fct_monthly_zone_revenue`
+After running your dbt project, query the `fct_monthly_zone_revenue` model.
+
+What is the count of records in the `fct_monthly_zone_revenue` model?
+
+
+**Solution**: **12,184**.
+
+<img src="./images/total_records_monthly_zones.png" alt="total_records_monthly_zones">
+
+<br>
+
+# Question 4. Best Performing Zone for Green Taxis (2020)
+Using the `fct_monthly_zone_revenue` table, find the pickup zone with the highest total revenue (`revenue_monthly_total_amount`) for **Green** taxi trips in 2020.
+
+Which zone had the highest revenue?
+
+
+**Solution**: **East Harlem North**.
+
+<img src="./images/green_taxi_top_revenue_zones_2020.png" alt="green_taxi_top_revenue_zones_2020">
+
+<br>
+
+# Question 5. Green Taxi Trip Counts (October 2019)
+Using the `fct_monthly_zone_revenue` table, what is the total number of trips (`total_monthly_trips`) for Green taxis in October 2019?
+
+
+**Solution**: **384,624**.
+
+<img src="./images/green_trip_count_oct_2019.png" alt="green_trip_count_oct_2019">
