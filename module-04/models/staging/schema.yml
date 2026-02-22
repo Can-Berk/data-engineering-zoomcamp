@@ -92,3 +92,63 @@ models:
         description: Total amount charged to passengers (does not include cash tips)
       - name: payment_type
         description: Payment method code (1=Credit card, 2=Cash, 3=No charge, 4=Dispute, 5=Unknown, 6=Voided)
+  
+  - name: stg_fhv_tripdata
+    description: >
+      Staging model for For-Hire Vehicle (FHV) trip data. This model standardizes
+      column names and data types from the raw FHV source, including safe timestamp
+      parsing for pickup/dropoff datetimes and numeric casting for location IDs and SR flag.
+      Includes a source_file column to support idempotent loads and lineage back to the
+      original GCS file.
+
+    columns:
+      - name: dispatching_base_num
+        description: >
+          Dispatching base number (TLC base license number) responsible for dispatching the trip.
+        data_tests:
+          - not_null
+
+      - name: pickup_datetime
+        description: >
+          Pickup date and time (parsed as timestamp). Used for partitioning in the final table.
+        data_tests:
+          - not_null
+
+      - name: dropoff_datetime
+        description: >
+          Dropoff date and time (parsed as timestamp). May be null if missing/invalid in source.
+
+      - name: pickup_location_id
+        description: >
+          TLC Taxi Zone ID where the trip began (nullable in source; cast to INT64).
+        data_tests:
+          - relationships:
+              to: ref('dim_zones')
+              field: location_id
+              config:
+                where: "pickup_location_id is not null"
+
+      - name: dropoff_location_id
+        description: >
+          TLC Taxi Zone ID where the trip ended (nullable in source; cast to INT64).
+        data_tests:
+          - relationships:
+              to: ref('dim_zones')
+              field: location_id
+              config:
+                where: "dropoff_location_id is not null"
+
+      - name: sr_flag
+        description: >
+          Shared Ride flag (SR_Flag in raw). Often empty in the source; stored as INT64 when present.
+
+      - name: affiliated_base_number
+        description: >
+          Affiliated base number (if any) associated with the trip.
+
+      - name: source_file
+        description: >
+          GCS URI of the ingested source file (e.g., gs://.../fhv_tripdata_YYYY-MM.csv.gz).
+          Used to make ingestion idempotent and trace records back to their origin.
+        data_tests:
+          - not_null

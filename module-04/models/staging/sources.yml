@@ -2,9 +2,10 @@ version: 2
 
 sources:
   - name: raw_data
-    description: "Raw data sources for NY Taxi rides"
+    description: "Raw data sources for NY Taxi rides and for-hire vehicle trip data loaded from BigQuery"
     database: data-workflows-demo # BigQuery project ID
     schema: nytaxi19_20 # BigQuery dataset name
     tables:
-      - name: yellow_tripdata # BigQuery table 1
-      - name: green_tripdata # BigQuery table 2
+      - name: yellow_tripdata # Raw Yellow Taxi trip records
+      - name: green_tripdata # Raw Green Taxi trip records
+      - name: fhv_2019 # Raw For-Hire Vehicle (FHV) trip records for 2019 loaded via ingestion pipeline
