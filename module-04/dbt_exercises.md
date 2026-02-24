@@ -90,3 +90,21 @@ Using the `fct_monthly_zone_revenue` table, what is the total number of trips (`
 **Solution**: **384,624**.
 
 <img src="./images/green_trip_count_oct_2019.png" alt="green_trip_count_oct_2019">
+
+<br>
+
+# Question 6. Build a Staging Model for FHV Data
+Create a staging model for the [For-Hire Vehicle (FHV)](https://github.com/DataTalksClub/nyc-tlc-data/releases/tag/fhv) trip data for 2019.
+
+1. Load the FHV trip data for 2019 into your data warehouse
+2. Create a staging model `stg_fhv_tripdata` with these requirements:
+  
+   - Filter out records where `dispatching_base_num IS NULL`
+   - Rename fields to match your project's naming conventions (e.g., `PUlocationID` → `pickup_location_id`)
+
+What is the count of records in `stg_fhv_tripdata`?
+
+
+**Solution**: **43,244,693**.
+
+<img src="./images/fhv_data_stg_row_number.png" alt="FHV tripdata staging model row number">
