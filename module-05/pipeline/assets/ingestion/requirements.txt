@@ -1,0 +1,5 @@
+# Add Python dependencies required by the python ingestion asset.
+pandas
+requests
+pyarrow
+python-dateutil
