@@ -263,5 +263,7 @@ serving_dir/
 .bruin.yml
 logs/runs
 logs/*.log
-__pycache__/
 *.py[cod]
+
+*.duckdb
+.dlt/
