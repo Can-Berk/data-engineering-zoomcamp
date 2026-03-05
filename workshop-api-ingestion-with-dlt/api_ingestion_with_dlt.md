@@ -4,6 +4,7 @@ This document contains solutions for the API ingestion workshop from the Data En
 ---
 
 # Data Source
+| Property   | Value |
 |------------|-------|
 | Base URL   | `https://us-central1-dlthub-analytics.cloudfunctions.net/data_engineering_zoomcamp_api` |
 | Format     | Paginated JSON |
