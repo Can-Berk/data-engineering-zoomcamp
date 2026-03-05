@@ -13,6 +13,8 @@ This repository contains my work and notes from [Data Engineering Zoomcamp](http
 | [BigQuery](https://cloud.google.com/bigquery) | Data Warehouse | Serverless analytics at scale |
 | [SQL](https://en.wikipedia.org/wiki/SQL) | Query Language | Querying and transforming data in PostgreSQL and BigQuery |
 | [dbt](https://www.getdbt.com/) | Analytics Engineering | Data modeling, testing, and transformations in BigQuery |
+| [dlt](https://dlthub.com/) | Data Ingestion | Python library for building reliable data loading pipelines |
+| [Bruin](https://getbruin.com/) | Data Pipeline Framework | Asset-based pipelines, incremental processing, and built-in data quality checks |
 | [Apache Spark](https://spark.apache.org/) | Distributed Processing Engine | Large-scale batch data processing |
 | [Apache Kafka](https://kafka.apache.org/) | Event Streaming Platform | Real-time event ingestion and stream processing |
 
@@ -27,3 +29,5 @@ This repository contains my work and notes from [Data Engineering Zoomcamp](http
 - [**`Module 2`**](module-02/): Workflow Orchestration with Kestra
 - [**`Module 3`**](module-03/): Data Warehousing with BigQuery
 - [**`Module 4`**](module-04/): Analytics engineering with dbt
+- [**`Module 5`**](module-05/): Data pipelines with Bruin
+- [**`Workshop DLT`](workshop-api-ingestion-with-dlt): API ingestion pipeline using dlt and DuckDB
